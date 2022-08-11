@@ -5,14 +5,14 @@ services:
     platform: linux/x86_64
     build:
       context: .
-      dockerfile: docker_mysql
-    image: 'mysql_ls:latest'
+      dockerfile: Dockerfile_mysql
+    image: 'mysql_school:latest'
     restart: always
-    container_name: db_school
+    container_name: db
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=db_school
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
     ports:
       - '3306:3306'

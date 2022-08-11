@@ -1,0 +1,13 @@
+FROM mysql:latest
+
+MAINTAINER me
+
+ENV MYSQL_DATABASE=db \
+    MYSQL_ROOT_PASSWORD=root
+
+ADD schema.sql /docker-entrypoint-initdb.d
+ADD language_school_dml.sql /docker-entrypoint-initdb.d
+
+EXPOSE 3306
+
+#https://community.jamaicans.dev/t/how-can-i-import-a-sql-file-once-i-start-up-my-docker-compose-file/295
