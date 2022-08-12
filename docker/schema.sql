@@ -169,8 +169,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `db`;
-INSERT INTO `db`.`user` (`id_user`, `name`, `surname`, `email`, `hashed_password`, `role`, `username`, `icon`) VALUES (1, 'Martin', 'Kvapil', 'm@gmail.com', 'TODO', 'admin', 'admin', NULL);
-INSERT INTO `db`.`user` (`id_user`, `name`, `surname`, `email`, `hashed_password`, `role`, `username`, `icon`) VALUES (2, 'Jiri', 'Kvapil', 'j@gmail.com', 'TODO', 'user', 'user', NULL);
+INSERT INTO `db`.`user` (`id_user`, `name`, `surname`, `email`, `hashed_password`, `role`, `username`, `icon`) VALUES (1, 'Martin', 'Kvapil', 'm@gmail.com', '$2a$10$yxQdnSRiQeEpGZ0clMukRux0GYWvdEGgxB4sQWTmiAE7YiUvjU8wG', 'admin', 'admin', NULL);
+INSERT INTO `db`.`user` (`id_user`, `name`, `surname`, `email`, `hashed_password`, `role`, `username`, `icon`) VALUES (2, 'Jiri', 'Kvapil', 'j@gmail.com', '$2a$10$Xg8twqsOV9ubpvgoYSMGoesSNvm0muqG.3n3G3KzCjhG4joAXUZJm', 'user', 'user', NULL);
 
 COMMIT;
 
