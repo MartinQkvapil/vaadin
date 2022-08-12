@@ -1,4 +1,4 @@
-package com.uhk.application.views.login;
+package com.uhk.application.school.views.login;
 
 import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
@@ -10,7 +10,6 @@ import com.vaadin.flow.router.Route;
 public class LoginView extends LoginOverlay {
     public LoginView() {
         setAction("login");
-
         LoginI18n i18n = LoginI18n.createDefault();
         i18n.setHeader(new LoginI18n.Header());
         i18n.getHeader().setTitle("Language school");

@@ -1,6 +1,6 @@
-package com.uhk.application.security;
+package com.uhk.application.school.security;
 
-import com.uhk.application.views.login.LoginView;
+import com.uhk.application.school.views.login.LoginView;
 import com.vaadin.flow.spring.security.VaadinWebSecurityConfigurerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

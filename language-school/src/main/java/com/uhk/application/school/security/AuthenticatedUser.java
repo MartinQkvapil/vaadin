@@ -1,7 +1,7 @@
-package com.uhk.application.security;
+package com.uhk.application.school.security;
 
-import com.uhk.application.data.entity.User;
-import com.uhk.application.data.service.UserRepository;
+import com.uhk.application.school.data.entity.User;
+import com.uhk.application.school.data.repository.UserRepository;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.server.VaadinServletRequest;
 import java.util.Optional;
@@ -16,8 +16,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticatedUser {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public AuthenticatedUser(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     private Optional<Authentication> getAuthentication() {
         SecurityContext context = SecurityContextHolder.getContext();
