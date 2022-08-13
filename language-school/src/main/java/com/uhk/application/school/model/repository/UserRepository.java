@@ -1,6 +1,6 @@
-package com.uhk.application.school.data.repository;
+package com.uhk.application.school.model.repository;
 
-import com.uhk.application.school.data.entity.User;
+import com.uhk.application.school.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
