@@ -1,6 +1,6 @@
-package com.uhk.application.views.createquestion;
+package com.uhk.application.school.views.quiz;
 
-import com.uhk.application.views.MainLayout;
+import com.uhk.application.school.views.layout.MainLayout;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -9,12 +9,12 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import javax.annotation.security.RolesAllowed;
 
-@PageTitle("Create Question")
-@Route(value = "create-question", layout = MainLayout.class)
-@RolesAllowed("admin")
-public class CreateQuestionView extends VerticalLayout {
+@PageTitle("Quiz")
+@Route(value = "quiz", layout = MainLayout.class)
+@RolesAllowed("user")
+public class QuizView extends VerticalLayout {
 
-    public CreateQuestionView() {
+    public QuizView() {
         setSpacing(false);
 
         Image img = new Image("images/empty-plant.png", "placeholder plant");

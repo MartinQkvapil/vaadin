@@ -1,4 +1,4 @@
-package com.uhk.application.components;
+package com.uhk.application.school.views.components;
 
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;

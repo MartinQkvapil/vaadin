@@ -1,4 +1,4 @@
-package com.uhk.application.components;
+package com.uhk.application.school.views.components;
 
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -20,5 +20,4 @@ public class LoginForm extends LitTemplate {
     public LoginForm() {
         // You can initialise any data required for the connected UI components here.
     }
-
 }

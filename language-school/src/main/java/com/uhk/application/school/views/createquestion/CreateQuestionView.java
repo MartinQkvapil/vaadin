@@ -1,6 +1,6 @@
-package com.uhk.application.views.createtest;
+package com.uhk.application.school.views.createquestion;
 
-import com.uhk.application.views.MainLayout;
+import com.uhk.application.school.views.layout.MainLayout;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -9,12 +9,12 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import javax.annotation.security.RolesAllowed;
 
-@PageTitle("Create Test")
-@Route(value = "create-test", layout = MainLayout.class)
+@PageTitle("Create Question")
+@Route(value = "create-question", layout = MainLayout.class)
 @RolesAllowed("admin")
-public class CreateTestView extends VerticalLayout {
+public class CreateQuestionView extends VerticalLayout {
 
-    public CreateTestView() {
+    public CreateQuestionView() {
         setSpacing(false);
 
         Image img = new Image("images/empty-plant.png", "placeholder plant");

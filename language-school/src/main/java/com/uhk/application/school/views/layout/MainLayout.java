@@ -1,15 +1,15 @@
-package com.uhk.application.views;
+package com.uhk.application.school.views.layout;
 
-import com.uhk.application.data.entity.User;
-import com.uhk.application.security.AuthenticatedUser;
-import com.uhk.application.views.contact.ContactView;
-import com.uhk.application.views.createcourse.CreateCourseView;
-import com.uhk.application.views.createquestion.CreateQuestionView;
-import com.uhk.application.views.createtest.CreateTestView;
-import com.uhk.application.views.dashboard.DashboardView;
-import com.uhk.application.views.home.HomeView;
-import com.uhk.application.views.manageusers.ManageUsersView;
-import com.uhk.application.views.quiz.QuizView;
+import com.uhk.application.school.model.entity.User;
+import com.uhk.application.school.model.security.AuthenticatedUser;
+import com.uhk.application.school.views.contact.ContactView;
+import com.uhk.application.school.views.createcourse.CreateCourseView;
+import com.uhk.application.school.views.createquestion.CreateQuestionView;
+import com.uhk.application.school.views.createtest.CreateTestView;
+import com.uhk.application.school.views.dashboard.DashboardView;
+import com.uhk.application.school.views.home.HomeView;
+import com.uhk.application.school.views.manageusers.ManageUsersView;
+import com.uhk.application.school.views.quiz.QuizView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -86,7 +86,7 @@ public class MainLayout extends AppLayout {
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();
 
-            Avatar avatar = new Avatar(user.getName(), user.getProfilePictureUrl());
+            Avatar avatar = new Avatar("TODO", "TODO");
             avatar.addClassNames("me-xs");
 
             ContextMenu userMenu = new ContextMenu(avatar);
@@ -95,7 +95,7 @@ public class MainLayout extends AppLayout {
                 authenticatedUser.logout();
             });
 
-            Span name = new Span(user.getName());
+            Span name = new Span(user.getName() + " " + user.getSurname());
             name.addClassNames("font-medium", "text-s", "text-secondary");
 
             layout.add(avatar, name);

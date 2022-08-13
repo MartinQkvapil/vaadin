@@ -1,16 +1,9 @@
-package com.uhk.application.views.manageusers;
+package com.uhk.application.school.views.manageusers;
 
-import com.uhk.application.components.LoginForm;
-import com.uhk.application.components.ManageUsersForm;
-import com.uhk.application.views.MainLayout;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.BeforeEnterEvent;
+import com.uhk.application.school.views.components.LoginForm;
+import com.uhk.application.school.views.layout.MainLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.templatemodel.TemplateModel;
 
 import javax.annotation.security.RolesAllowed;
 

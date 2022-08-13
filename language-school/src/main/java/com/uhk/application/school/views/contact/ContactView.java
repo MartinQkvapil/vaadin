@@ -1,6 +1,6 @@
-package com.uhk.application.views.contact;
+package com.uhk.application.school.views.contact;
 
-import com.uhk.application.views.MainLayout;
+import com.uhk.application.school.views.layout.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;

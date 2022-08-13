@@ -12,12 +12,13 @@ public class LoginView extends LoginOverlay {
         setAction("login");
         LoginI18n i18n = LoginI18n.createDefault();
         i18n.setHeader(new LoginI18n.Header());
-        i18n.getHeader().setTitle("Language school");
+        i18n.getHeader().setTitle("School:");
+        i18n.getHeader().setDescription("Language courses and tests.");
         i18n.getHeader().setDescription("Login using user/user or admin/admin");
         i18n.setAdditionalInformation(null);
         setI18n(i18n);
 
-        setForgotPasswordButtonVisible(false);
+        setForgotPasswordButtonVisible(true);
         setOpened(true);
     }
 
