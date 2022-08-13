@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="test_to_question")
-public class TestToQuestion extends AbstractEntity implements Serializable {
+public class TestToQuestion implements Serializable {
     @Id
     @Column(nullable = false, updatable = false)
     private int idTestToQuestion;

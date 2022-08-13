@@ -1,9 +1,8 @@
-package com.uhk.application.school.data.service;
+package com.uhk.application.school.model.service;
 
-import com.uhk.application.school.data.entity.User;
+import com.uhk.application.school.model.entity.User;
 
-import com.uhk.application.school.data.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.uhk.application.school.model.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,5 +24,4 @@ public class UserService {
     public int count() {
         return (int) userRepository.count();
     }
-
 }

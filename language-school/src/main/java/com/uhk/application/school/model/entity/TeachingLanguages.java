@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "teaching_lang")
-public class TeachingLanguages extends AbstractEntity implements Serializable {
+public class TeachingLanguages implements Serializable {
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(name="id_teaching_lang", nullable = false, updatable = false)
     private String idTeachingLanguage;
 
     private String name;

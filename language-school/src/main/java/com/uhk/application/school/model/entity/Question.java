@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="question")
-public class Question extends AbstractEntity implements Serializable {
+public class Question implements Serializable {
     @Id
     @Column(nullable = false, updatable = false)
     private int idQuestion;
@@ -23,11 +23,11 @@ public class Question extends AbstractEntity implements Serializable {
     private String answer2;
 
 
-    @Column(name="answ2")
+    @Column(name="answ3")
     private String answer3;
 
 
-    @Column(name="answ2")
+    @Column(name="answ4")
     private String answer4;
 
     private int points;
