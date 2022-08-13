@@ -1,4 +1,4 @@
-package com.uhk.application.data;
+package com.uhk.application.school.model.entity;
 
 import com.vaadin.fusion.Nonnull;
 import javax.persistence.GeneratedValue;
