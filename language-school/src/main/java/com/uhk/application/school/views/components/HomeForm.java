@@ -7,10 +7,13 @@ import com.uhk.application.school.model.security.UserDetailsServiceImpl;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.littemplate.LitTemplate;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -59,6 +62,9 @@ public class HomeForm extends LitTemplate {
         List<TeachingLanguages> languages = school.getAllLanguages();
         languageGrid.setItems(languages);
 
+        selectLanguages.setItemLabelGenerator(TeachingLanguages::getName);
+        selectLanguages.setItems(languages);
+
         orderCourseButton.addClickListener(orderCourseListener());
     }
 
@@ -73,7 +79,13 @@ public class HomeForm extends LitTemplate {
             user.setUsername(inputLogin.getValue());
             user.setIcon("");
 
-            school.saveUser(user);
+            try {
+                school.saveUser(user);
+            } catch (Exception e) {
+                Dialog dialog = new Dialog();
+                dialog.add(new Text(e.getMessage()));
+                dialog.open();
+            }
         };
     }
 

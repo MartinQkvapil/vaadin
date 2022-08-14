@@ -10,5 +10,5 @@ public interface LanguageSchool {
 
     List<TeachingLanguages> getAllLanguages();
 
-    void saveUser(User user);
+    void saveUser(User user) throws Exception;
 }
