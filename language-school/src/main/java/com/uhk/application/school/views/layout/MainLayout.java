@@ -2,7 +2,6 @@ package com.uhk.application.school.views.layout;
 
 import com.uhk.application.school.model.entity.User;
 import com.uhk.application.school.model.security.Authentication;
-import com.uhk.application.school.views.contact.ContactView;
 import com.uhk.application.school.views.createquestion.CreateQuestionView;
 import com.uhk.application.school.views.createtest.CreateTestView;
 import com.uhk.application.school.views.dashboard.DashboardView;
@@ -124,8 +123,6 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo("Dashboard", "lab la-dashcube", DashboardView.class), //
 
                 new MenuItemInfo("Quiz", "la la-file", QuizView.class), //
-
-                new MenuItemInfo("Contact", "la la-file-contract", ContactView.class), //
 
                 new MenuItemInfo("Create Test", "la la-book-open", CreateTestView.class), //
 
