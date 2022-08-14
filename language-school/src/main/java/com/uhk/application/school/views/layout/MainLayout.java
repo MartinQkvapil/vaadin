@@ -1,9 +1,8 @@
 package com.uhk.application.school.views.layout;
 
 import com.uhk.application.school.model.entity.User;
-import com.uhk.application.school.model.security.AuthenticatedUser;
+import com.uhk.application.school.model.security.Authentication;
 import com.uhk.application.school.views.contact.ContactView;
-import com.uhk.application.school.views.createcourse.CreateCourseView;
 import com.uhk.application.school.views.createquestion.CreateQuestionView;
 import com.uhk.application.school.views.createtest.CreateTestView;
 import com.uhk.application.school.views.dashboard.DashboardView;
@@ -54,10 +53,10 @@ public class MainLayout extends AppLayout {
 
     }
 
-    private AuthenticatedUser authenticatedUser;
+    private Authentication authenticatedUser;
     private AccessAnnotationChecker accessChecker;
 
-    public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker) {
+    public MainLayout(Authentication authenticatedUser, AccessAnnotationChecker accessChecker) {
         this.authenticatedUser = authenticatedUser;
         this.accessChecker = accessChecker;
 
@@ -133,8 +132,6 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo("Create Question", "la la-file", CreateQuestionView.class), //
 
                 new MenuItemInfo("Manage Users", "la la-user-circle", ManageUsersView.class), //
-
-                new MenuItemInfo("Create Course", "la la-adjust", CreateCourseView.class), //
 
         };
         List<RouterLink> links = new ArrayList<>();

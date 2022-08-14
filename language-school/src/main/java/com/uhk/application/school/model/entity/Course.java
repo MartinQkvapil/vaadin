@@ -18,7 +18,7 @@ public class Course implements Serializable {
     private String native_lang;
 
     private String description;
-
+    @Column(name = "id_teaching_lang")
     private int idTeachingLanguage;
 
     private int IdUser;

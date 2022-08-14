@@ -1,4 +1,4 @@
-package com.uhk.application.school.security;
+package com.uhk.application.school.model.security;
 
 import com.uhk.application.school.views.login.LoginView;
 import com.vaadin.flow.spring.security.VaadinWebSecurityConfigurerAdapter;

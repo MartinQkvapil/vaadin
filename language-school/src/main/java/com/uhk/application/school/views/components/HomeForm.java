@@ -4,6 +4,7 @@ import com.uhk.application.school.controller.LanguageSchool;
 import com.uhk.application.school.model.entity.Course;
 import com.uhk.application.school.model.entity.TeachingLanguages;
 import com.uhk.application.school.model.entity.User;
+import com.uhk.application.school.model.security.Authentication;
 import com.uhk.application.school.model.security.UserDetailsServiceImpl;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -23,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A Designer generated component for the home-form template.
@@ -36,6 +38,10 @@ public class HomeForm extends LitTemplate {
 
     @Autowired
     private LanguageSchool school;
+
+    @Autowired
+    private Authentication authentication;
+
     @Id("languageGrid")
     private Grid<TeachingLanguages> languageGrid;
 
@@ -65,6 +71,7 @@ public class HomeForm extends LitTemplate {
 
         selectLanguages.setItemLabelGenerator(TeachingLanguages::getName);
         selectLanguages.setItems(languages);
+        selectLanguages.setValue(languages.get(0));
 
         orderCourseButton.addClickListener(orderCourseListener());
     }
@@ -88,12 +95,22 @@ public class HomeForm extends LitTemplate {
             course.setIdTeachingLanguage(selectLanguages.getValue().getIdTeachingLanguage());
 
             try {
-                // TODO kontrolovat, jestli je uživatel přihlášený a případně toto nevypisovat a nevytvářet novou.
-                school.saveUser(user);
+                String msg = "";
+                if (!authentication.get().isPresent()) {
+                    school.saveUser(user);
+                    msg = "Nový uživatel úspěšně vytvořen - přihlašte se. ";
+                }
+                Optional<User> maybeUser = authentication.get();
+                if (maybeUser.isPresent()) {
+                    User loggedUser = maybeUser.get();
+                    course.setIdUser(loggedUser.getIdUser());
+                }
                 school.saveCourse(course);
+                msg += "Nový kurz úspěšně vytvořen.";
                 Dialog dialog = new Dialog();
-                dialog.add(new Text("Nový kurz úspěžně objednán - přihlašte se."));
+                dialog.add(new Text(msg));
                 dialog.open();
+
             } catch (Exception e) {
                 Dialog dialog = new Dialog();
                 dialog.add(new Text(e.getMessage()));
