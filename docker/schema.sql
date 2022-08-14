@@ -10,7 +10,7 @@ DROP SCHEMA IF EXISTS `db` ;
 -- -----------------------------------------------------
 -- Schema db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `db` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+CREATE SCHEMA IF NOT EXISTS `db` DEFAULT CHARACTER SET utf8 COLLATE utf8;
 USE `db` ;
 
 -- -----------------------------------------------------
