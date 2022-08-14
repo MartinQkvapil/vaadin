@@ -21,7 +21,7 @@ public class Course implements Serializable {
     @Column(name = "id_teaching_lang")
     private int idTeachingLanguage;
 
-    private int IdUser;
+    private int idUser;
 
     public Course() {}
 
@@ -66,10 +66,10 @@ public class Course implements Serializable {
     }
 
     public int getIdUser() {
-        return IdUser;
+        return idUser;
     }
 
     public void setIdUser(int idUser) {
-        IdUser = idUser;
+        this.idUser = idUser;
     }
 }

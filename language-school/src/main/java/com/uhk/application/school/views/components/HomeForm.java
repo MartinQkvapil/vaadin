@@ -74,6 +74,9 @@ public class HomeForm extends LitTemplate {
         selectLanguages.setValue(languages.get(0));
 
         orderCourseButton.addClickListener(orderCourseListener());
+
+        System.out.println(UserDetailsServiceImpl.getHashedPassword("admin"));
+        System.out.println(UserDetailsServiceImpl.getHashedPassword("user"));
     }
 
     private ComponentEventListener<ClickEvent<Button>> orderCourseListener() {

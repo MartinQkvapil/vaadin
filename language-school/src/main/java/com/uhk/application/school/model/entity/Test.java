@@ -11,13 +11,11 @@ import java.io.Serializable;
 @Table(name="test")
 public class Test implements Serializable {
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, name="id_test")
     private int idTest;
 
+    @Column(name="question_count")
     private int questionCount;
-
-    @Column(name="user_id_user")
-    private int userId;
 
     public Test() {}
 
@@ -35,13 +33,5 @@ public class Test implements Serializable {
 
     public void setQuestionCount(int questionCount) {
         this.questionCount = questionCount;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 }

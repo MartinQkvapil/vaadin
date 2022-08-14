@@ -1,9 +1,6 @@
 package com.uhk.application.school.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -11,11 +8,11 @@ import java.io.Serializable;
 public class CourseToTest implements Serializable {
 
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, name="id_course_to_test")
     private int idCourseToTest;
-
+    @Column(name="id_course")
     private int idCourse;
-
+    @Column(name="id_test")
     private int idTest;
 
     public CourseToTest() {}

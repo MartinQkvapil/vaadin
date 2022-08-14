@@ -2,10 +2,12 @@ package com.uhk.application.school.controller;
 
 import com.uhk.application.school.model.entity.Course;
 import com.uhk.application.school.model.entity.TeachingLanguages;
+import com.uhk.application.school.model.entity.Test;
 import com.uhk.application.school.model.entity.User;
 import com.uhk.application.school.model.repository.*;
 import com.uhk.application.school.model.validator.CourseValidator;
 import com.uhk.application.school.model.validator.UserValidator;
+import com.uhk.application.school.model.validator.TestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,10 @@ public class MainControllerImpl implements LanguageSchool{
     private CourseValidator courseValidator;
     @Autowired
     private TeachingLanguagesRepository teachingLanguagesRepository;
+    @Autowired
+    private TestRepository testRepository;
+    @Autowired
+    private TestValidator testValidator;
 
     @Override
     public User getUserByName(String name) {
@@ -47,4 +53,11 @@ public class MainControllerImpl implements LanguageSchool{
         courseValidator.validate(course);
         courseRepository.save(course);
     }
+
+    @Override
+    public List<Test> getAllTestsByUserId(int userId) {
+        return testRepository.findAllByUserId(userId);
+    }
+
+
 }
