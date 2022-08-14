@@ -1,6 +1,7 @@
 package com.uhk.application.school.views.components;
 
 import com.uhk.application.school.controller.LanguageSchool;
+import com.uhk.application.school.model.entity.Course;
 import com.uhk.application.school.model.entity.TeachingLanguages;
 import com.uhk.application.school.model.entity.User;
 import com.uhk.application.school.model.security.UserDetailsServiceImpl;
@@ -79,8 +80,20 @@ public class HomeForm extends LitTemplate {
             user.setUsername(inputLogin.getValue());
             user.setIcon("");
 
+            Course course = new Course();
+            course.setDescription("Kurz pro uživatele " + user.getName() + " " + user.getSurname());
+            course.setPoints(0);
+            course.setIdUser(user.getIdUser());
+            course.setNative_lang("cz");
+            course.setIdTeachingLanguage(selectLanguages.getValue().getIdTeachingLanguage());
+
             try {
+                // TODO kontrolovat, jestli je uživatel přihlášený a případně toto nevypisovat a nevytvářet novou.
                 school.saveUser(user);
+                school.saveCourse(course);
+                Dialog dialog = new Dialog();
+                dialog.add(new Text("Nový kurz úspěžně objednán - přihlašte se."));
+                dialog.open();
             } catch (Exception e) {
                 Dialog dialog = new Dialog();
                 dialog.add(new Text(e.getMessage()));

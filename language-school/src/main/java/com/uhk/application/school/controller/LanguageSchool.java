@@ -1,5 +1,6 @@
 package com.uhk.application.school.controller;
 
+import com.uhk.application.school.model.entity.Course;
 import com.uhk.application.school.model.entity.TeachingLanguages;
 import com.uhk.application.school.model.entity.User;
 
@@ -11,4 +12,6 @@ public interface LanguageSchool {
     List<TeachingLanguages> getAllLanguages();
 
     void saveUser(User user) throws Exception;
+
+    void saveCourse(Course course) throws Exception;
 }

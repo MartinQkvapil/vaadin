@@ -1,12 +1,10 @@
-package com.uhk.application.school.security;
+package com.uhk.application.school.model.security;
 
-import com.uhk.application.school.data.entity.User;
-import com.uhk.application.school.data.repository.UserRepository;
+import com.uhk.application.school.model.entity.User;
+import com.uhk.application.school.model.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,12 +26,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("No user present with username: " + username);
         } else {
-            org.springframework.security.crypto.password.PasswordEncoder encoder
-                    = new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
-            encoder.encode("admin");
-            System.out.println(encoder.encode("admin"));
-            System.out.println(encoder.encode("user"));
-            System.out.println(user.getHashedPassword());
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getHashedPassword(),
                     getAuthorities(user));
         }
@@ -44,6 +36,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         list.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
         return list;
 
+    }
+
+    public static String getHashedPassword(String password) {
+            org.springframework.security.crypto.password.PasswordEncoder encoder = new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
+            return encoder.encode(password);
     }
 
 }
