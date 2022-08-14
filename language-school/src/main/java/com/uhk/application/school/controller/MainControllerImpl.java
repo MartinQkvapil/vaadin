@@ -49,6 +49,12 @@ public class MainControllerImpl implements LanguageSchool{
     @Override
     public void saveUser(User user) throws Exception {
         userValidator.validate(user);
+
+        Optional<User> temp = userRepository.findById(user.getIdUser());
+        if (temp.isPresent()) {
+            user.setIdUser(temp.get().getIdUser());
+        }
+
         userRepository.save(user);
     }
 
@@ -82,5 +88,9 @@ public class MainControllerImpl implements LanguageSchool{
     @Override
     public void removeQuestion(Question question) {
         questionRepository.delete(question);
+    }
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

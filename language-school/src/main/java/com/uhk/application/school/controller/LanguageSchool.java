@@ -20,4 +20,6 @@ public interface LanguageSchool {
     void saveQuestion(Question question) throws Exception;
 
     void removeQuestion(Question question);
+
+    List<User> getAllUsers();
 }
