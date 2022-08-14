@@ -14,14 +14,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.ListItem;
-import com.vaadin.flow.component.html.Nav;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.html.UnorderedList;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
@@ -77,6 +70,10 @@ public class MainLayout extends AppLayout {
 
         Div layout = new Div();
         layout.addClassNames("flex", "h-xl", "items-center", "px-l");
+
+        Image img = new Image("images/lang-logo.png", "placeholder plant");
+        img.setWidth("30px");
+        layout.add(img);
 
         H1 appName = new H1("Language school");
         appName.addClassNames("my-0", "me-auto", "text-l");
