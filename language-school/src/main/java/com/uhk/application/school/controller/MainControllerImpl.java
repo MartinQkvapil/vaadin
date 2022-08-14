@@ -1,11 +1,10 @@
 package com.uhk.application.school.controller;
 
-import com.uhk.application.school.model.entity.Course;
-import com.uhk.application.school.model.entity.TeachingLanguages;
-import com.uhk.application.school.model.entity.Test;
-import com.uhk.application.school.model.entity.User;
+import com.uhk.application.school.exception.QuestionException;
+import com.uhk.application.school.model.entity.*;
 import com.uhk.application.school.model.repository.*;
 import com.uhk.application.school.model.validator.CourseValidator;
+import com.uhk.application.school.model.validator.QuestionValidator;
 import com.uhk.application.school.model.validator.UserValidator;
 import com.uhk.application.school.model.validator.TestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Transactional
@@ -31,6 +31,10 @@ public class MainControllerImpl implements LanguageSchool{
     private TestRepository testRepository;
     @Autowired
     private TestValidator testValidator;
+    @Autowired
+    private QuestionRepository questionRepository;
+    @Autowired
+    private QuestionValidator questionValidator;
 
     @Override
     public User getUserByName(String name) {
@@ -59,5 +63,24 @@ public class MainControllerImpl implements LanguageSchool{
         return testRepository.findAllByUserId(userId);
     }
 
+    @Override
+    public List<Question> getAllQuestions() {
+        return questionRepository.findAll();
+    }
 
+    @Override
+    public void saveQuestion(Question question) throws Exception {
+        questionValidator.validate(question);
+
+        Optional<Question> temp = questionRepository.findById(question.getIdQuestion());
+        if (temp.isPresent()) {
+            question.setIdQuestion(temp.get().getIdQuestion());
+        }
+        
+        questionRepository.save(question);
+    }
+    @Override
+    public void removeQuestion(Question question) {
+        questionRepository.delete(question);
+    }
 }

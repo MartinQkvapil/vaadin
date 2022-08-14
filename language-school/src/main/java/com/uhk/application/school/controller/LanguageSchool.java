@@ -1,9 +1,6 @@
 package com.uhk.application.school.controller;
 
-import com.uhk.application.school.model.entity.Course;
-import com.uhk.application.school.model.entity.TeachingLanguages;
-import com.uhk.application.school.model.entity.Test;
-import com.uhk.application.school.model.entity.User;
+import com.uhk.application.school.model.entity.*;
 
 import java.util.List;
 
@@ -17,4 +14,10 @@ public interface LanguageSchool {
     void saveCourse(Course course) throws Exception;
 
     List<Test> getAllTestsByUserId(int idUser);
+
+    List<Question> getAllQuestions();
+
+    void saveQuestion(Question question) throws Exception;
+
+    void removeQuestion(Question question);
 }

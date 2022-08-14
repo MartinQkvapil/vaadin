@@ -17,6 +17,8 @@ public class TestToQuestion implements Serializable {
 
     private int idQuestion;
 
+    private String answer;
+
     public TestToQuestion() {
     }
 
@@ -42,5 +44,13 @@ public class TestToQuestion implements Serializable {
 
     public void setIdQuestion(int idQuestion) {
         this.idQuestion = idQuestion;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }
