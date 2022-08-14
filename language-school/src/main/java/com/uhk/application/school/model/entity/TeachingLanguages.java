@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class TeachingLanguages implements Serializable {
     @Id
     @Column(name="id_teaching_lang", nullable = false, updatable = false)
-    private String idTeachingLanguage;
+    private int idTeachingLanguage;
 
     private String name;
 
@@ -18,11 +18,11 @@ public class TeachingLanguages implements Serializable {
 
     public TeachingLanguages() {}
 
-    public String getIdTeachingLanguage() {
+    public int getIdTeachingLanguage() {
         return idTeachingLanguage;
     }
 
-    public void setIdTeachingLanguage(String idTeachingLanguage) {
+    public void setIdTeachingLanguage(int idTeachingLanguage) {
         this.idTeachingLanguage = idTeachingLanguage;
     }
 
@@ -40,5 +40,22 @@ public class TeachingLanguages implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    @Override
+    public int hashCode() {
+        return idTeachingLanguage;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof TeachingLanguages)) {
+            return false;
+        }
+        TeachingLanguages other = (TeachingLanguages) obj;
+        return idTeachingLanguage == other.idTeachingLanguage;
     }
 }

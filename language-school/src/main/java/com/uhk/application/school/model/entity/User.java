@@ -10,8 +10,8 @@ import java.io.Serializable;
 @Table(name="user")
 public class User implements Serializable {
     @Id
-    @Column(nullable = false, updatable = false)
-    private String idUser;
+    @Column(nullable = false)
+    private int idUser;
 
     private String name;
 
@@ -29,11 +29,11 @@ public class User implements Serializable {
 
     public User() {}
 
-    public String getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
