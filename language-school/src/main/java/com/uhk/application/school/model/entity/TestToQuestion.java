@@ -17,6 +17,7 @@ public class TestToQuestion implements Serializable {
 
     private int idQuestion;
 
+    @Column(name="answ")
     private String answer;
 
     public TestToQuestion() {

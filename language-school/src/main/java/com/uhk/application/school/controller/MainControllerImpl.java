@@ -1,6 +1,5 @@
 package com.uhk.application.school.controller;
 
-import com.uhk.application.school.exception.QuestionException;
 import com.uhk.application.school.model.entity.*;
 import com.uhk.application.school.model.repository.*;
 import com.uhk.application.school.model.validator.CourseValidator;
@@ -35,6 +34,12 @@ public class MainControllerImpl implements LanguageSchool{
     private QuestionRepository questionRepository;
     @Autowired
     private QuestionValidator questionValidator;
+
+    @Autowired
+    private CourseToTestRepository courseToTestRepository;
+
+    @Autowired
+    private TestToQuestionRepository testToQuestionRepository;
 
     @Override
     public User getUserByName(String name) {
@@ -92,5 +97,39 @@ public class MainControllerImpl implements LanguageSchool{
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+    @Override
+    public List<Question> getAllQuestionsByTestId(int idTest) {
+        return questionRepository.findAllByTestId(idTest);
+    }
+
+    @Override
+    public Test saveTest(Test test) throws Exception {
+        testValidator.validate(test);
+        return testRepository.save(test);
+    }
+
+    @Override
+    public List<Test> getAllTests() {
+        return testRepository.findAll();
+    }
+
+    public void removeTest(Test test) {
+         courseToTestRepository.deleteAllById(courseToTestRepository.getByTestId(test.getIdTest()));
+         testToQuestionRepository.deleteAllById(testToQuestionRepository.getByTestId(test.getIdTest()));
+         testRepository.delete(test);
+    }
+
+    public void removeTestToQuestion(Question currentQuestion, Test currentTest) {
+        TestToQuestion c2t = testToQuestionRepository.getByTestIdAndQuestionId(currentTest.getIdTest(), currentQuestion.getIdQuestion());
+        testToQuestionRepository.deleteById(c2t.getIdTestToQuestion());
+    }
+
+    public void saveTestToQuestion(TestToQuestion testToQuestion) {
+        testToQuestionRepository.save(testToQuestion);
+    }
+
+    public List<Test> getAllTestsByLanguage(int idTeachingLanguage) {
+        return testRepository.findAllByLanguageId(idTeachingLanguage);
     }
 }

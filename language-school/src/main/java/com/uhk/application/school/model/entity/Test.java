@@ -17,6 +17,20 @@ public class Test implements Serializable {
     @Column(name="question_count")
     private int questionCount;
 
+    @Column(name="test_name")
+    private String testName;
+
+    @Column(name="id_teaching_lang")
+    private int testLanguageId;
+
+    public int getTestLanguage() {
+        return testLanguageId;
+    }
+
+    public void setTestLanguage(int languageId) {
+        this.testLanguageId = languageId;
+    }
+
     public Test() {}
 
     public int getIdTest() {
@@ -33,5 +47,21 @@ public class Test implements Serializable {
 
     public void setQuestionCount(int questionCount) {
         this.questionCount = questionCount;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "idTest=" + idTest +
+                ", questionCount=" + questionCount +
+                '}';
     }
 }

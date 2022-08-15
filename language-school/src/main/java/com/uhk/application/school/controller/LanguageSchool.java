@@ -22,4 +22,18 @@ public interface LanguageSchool {
     void removeQuestion(Question question);
 
     List<User> getAllUsers();
+
+    List<Question> getAllQuestionsByTestId(int idTest);
+
+    Test saveTest(Test test) throws Exception;
+
+    List<Test>  getAllTests();
+
+    void removeTest(Test currentTest);
+
+    void removeTestToQuestion(Question currentQuestion, Test currentTest);
+
+    void saveTestToQuestion(TestToQuestion testToQuestion);
+
+    List<Test> getAllTestsByLanguage(int idTeachingLanguage);
 }

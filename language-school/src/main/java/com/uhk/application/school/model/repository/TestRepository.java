@@ -19,5 +19,10 @@ public interface TestRepository extends JpaRepository<Test, Integer> {
             "where u.id_user = ?1",
         nativeQuery = true)
     List<Test> findAllByUserId(int idUser);
-//    select u.userName from User u inner join u.area ar where ar.idArea = :idArea
+
+    @Query(value = "select * " +
+            "from test t " +
+            "where t.id_teaching_lang = ?1",
+            nativeQuery = true)
+    List<Test> findAllByLanguageId(int idTeachingLanguage);
 }
