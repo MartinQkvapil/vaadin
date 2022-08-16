@@ -63,7 +63,7 @@ public class HomeForm extends LitTemplate {
 
     @PostConstruct
     public void init() {
-        languageGrid.addColumn(TeachingLanguages::getIdTeachingLanguage).setHeader("ID jazyka").setSortable(true);
+        languageGrid.addColumn(TeachingLanguages::getCode).setHeader("Kód jazyka").setSortable(true);
         languageGrid.addColumn(TeachingLanguages::getName).setHeader("Vyučovaný jazyk").setSortable(true);
         List<TeachingLanguages> languages = school.getAllLanguages();
         languageGrid.setItems(languages);

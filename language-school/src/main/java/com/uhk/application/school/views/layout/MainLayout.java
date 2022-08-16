@@ -112,11 +112,12 @@ public class MainLayout extends AppLayout {
 
         // Wrap the links in a list; improves accessibility
         UnorderedList list = new UnorderedList();
-        list.addClassNames("flex", "list-none", "m-1", "p-0");
+        list.addClassNames("menu", "flex", "list-none", "m-1", "p-0");
         nav.add(list);
 
         for (RouterLink link : createLinks()) {
             ListItem item = new ListItem(link);
+            item.addClassNames("menu-item");
             list.add(item);
         }
 
