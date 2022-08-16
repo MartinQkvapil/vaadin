@@ -1,6 +1,7 @@
 package com.uhk.application.school.views.components;
 
 import com.uhk.application.school.controller.LanguageSchool;
+import com.uhk.application.school.exception.UserException;
 import com.uhk.application.school.model.entity.Course;
 import com.uhk.application.school.model.entity.TeachingLanguages;
 import com.uhk.application.school.model.entity.User;
@@ -23,6 +24,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import javax.management.Notification;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,25 +104,31 @@ public class HomeForm extends LitTemplate {
             course.setIdTeachingLanguage(selectLanguages.getValue().getIdTeachingLanguage());
 
             try {
+                Optional<User> maybeUser = authentication.get();
                 String msg = "";
-                if (!authentication.get().isPresent()) {
+
+                if (!maybeUser.isPresent()) {
                     school.saveUser(user);
                     msg = "Nový uživatel úspěšně vytvořen - přihlašte se. ";
                 }
-                Optional<User> maybeUser = authentication.get();
+
                 if (maybeUser.isPresent()) {
                     User loggedUser = maybeUser.get();
                     course.setIdUser(loggedUser.getIdUser());
                 }
+
                 school.saveCourse(course);
                 msg += "Nový kurz úspěšně vytvořen.";
                 Dialog dialog = new Dialog();
                 dialog.add(new Text(msg));
                 dialog.open();
-
-            } catch (Exception e) {
+            } catch (UserException e) {
                 Dialog dialog = new Dialog();
                 dialog.add(new Text(e.getMessage()));
+                dialog.open();
+            } catch (Exception e) {
+                Dialog dialog = new Dialog();
+                dialog.add(new Text("Tento uživate databázi již existuje."));
                 dialog.open();
             }
         };

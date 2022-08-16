@@ -10,9 +10,6 @@ import java.util.Objects;
 
 @Service
 public class UserValidator {
-    @Autowired
-    private UserRepository userRepository;
-
     public void validate(User user) throws Exception {
         if (user == null) {
             throw new UserException("Neexistuje uživatel");

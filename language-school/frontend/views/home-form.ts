@@ -2,9 +2,9 @@ import { LitElement, html, css, customElement } from 'lit-element';
 import '@vaadin/vaadin-ordered-layout/src/vaadin-vertical-layout.js';
 import '@vaadin/grid/src/vaadin-grid.js';
 import '@vaadin/form-layout/src/vaadin-form-layout.js';
-import '@vaadin/text-field/src/vaadin-text-field.js';
 import '@vaadin/password-field/src/vaadin-password-field.js';
 import '@vaadin/button/src/vaadin-button.js';
+import '@vaadin/text-field/src/vaadin-text-field.js';
 
 @customElement('home-form')
 export class HomeForm extends LitElement {
