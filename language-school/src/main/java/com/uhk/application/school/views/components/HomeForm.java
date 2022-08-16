@@ -14,6 +14,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.template.Id;
@@ -59,6 +60,8 @@ public class HomeForm extends LitTemplate {
     private PasswordField inputPassword;
     @Id("inputLogin")
     private TextField inputLogin;
+    @Id("divOrderCourse")
+    private Div divOrderCourse;
 
 
     @PostConstruct
@@ -73,6 +76,12 @@ public class HomeForm extends LitTemplate {
         selectLanguages.setValue(languages.get(0));
 
         orderCourseButton.addClickListener(orderCourseListener());
+
+        if (authentication.get().isPresent()) {
+            Optional<User> user = authentication.get();
+            divOrderCourse.addClassNames("hide");
+        }
+
     }
 
     private ComponentEventListener<ClickEvent<Button>> orderCourseListener() {

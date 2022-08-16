@@ -27,3 +27,7 @@
     background-color: darkgray !important;
     border-radius: 25px;
 }
+
+.hide {
+    display: none;
+}
