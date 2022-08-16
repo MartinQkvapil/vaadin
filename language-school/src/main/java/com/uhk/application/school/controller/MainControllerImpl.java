@@ -132,4 +132,12 @@ public class MainControllerImpl implements LanguageSchool{
     public List<Test> getAllTestsByLanguage(int idTeachingLanguage) {
         return testRepository.findAllByLanguageId(idTeachingLanguage);
     }
+
+    public CourseToTest getCourseToTestByUserAndTestId(int idUser, int idTest) {
+        return courseToTestRepository.findByUserIdAndTestId(idUser, idTest);
+    }
+
+    public  void saveCourseToTest(CourseToTest courseToTest) {
+        courseToTestRepository.save(courseToTest);
+    }
 }

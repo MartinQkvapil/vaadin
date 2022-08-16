@@ -15,6 +15,17 @@ public class CourseToTest implements Serializable {
     @Column(name="id_test")
     private int idTest;
 
+    @Column(name="done")
+    private int done;
+
+    public int getDone() {
+        return done;
+    }
+
+    public void setDone(int done) {
+        this.done = done;
+    }
+
     public CourseToTest() {}
 
     public int getIdCourseToTest() {

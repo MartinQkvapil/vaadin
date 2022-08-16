@@ -36,4 +36,8 @@ public interface LanguageSchool {
     void saveTestToQuestion(TestToQuestion testToQuestion);
 
     List<Test> getAllTestsByLanguage(int idTeachingLanguage);
+
+    CourseToTest getCourseToTestByUserAndTestId(int idUser, int idTest);
+
+    void saveCourseToTest(CourseToTest courseToTest);
 }
