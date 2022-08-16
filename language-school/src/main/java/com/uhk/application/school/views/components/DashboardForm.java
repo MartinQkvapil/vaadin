@@ -1,10 +1,9 @@
 package com.uhk.application.school.views.components;
 
 import com.uhk.application.school.controller.LanguageSchool;
-import com.uhk.application.school.model.entity.TeachingLanguages;
 import com.uhk.application.school.model.entity.Test;
 import com.uhk.application.school.model.entity.User;
-import com.uhk.application.school.model.security.Authentication;
+import com.uhk.application.school.model.security.AuthenticationService;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.charts.Chart;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -31,7 +30,7 @@ public class DashboardForm extends LitTemplate {
     private LanguageSchool school;
 
     @Autowired
-    private Authentication authentication;
+    private AuthenticationService authentication;
 
     @Id("chartAnswers")
     private Chart chartAnswers;

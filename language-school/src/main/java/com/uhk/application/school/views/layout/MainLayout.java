@@ -1,7 +1,7 @@
 package com.uhk.application.school.views.layout;
 
 import com.uhk.application.school.model.entity.User;
-import com.uhk.application.school.model.security.Authentication;
+import com.uhk.application.school.model.security.AuthenticationService;
 import com.uhk.application.school.views.createquestion.CreateQuestionView;
 import com.uhk.application.school.views.createtest.CreateTestView;
 import com.uhk.application.school.views.dashboard.DashboardView;
@@ -52,10 +52,10 @@ public class MainLayout extends AppLayout {
 
     }
 
-    private Authentication authenticatedUser;
+    private AuthenticationService authenticatedUser;
     private AccessAnnotationChecker accessChecker;
 
-    public MainLayout(Authentication authenticatedUser, AccessAnnotationChecker accessChecker) {
+    public MainLayout(AuthenticationService authenticatedUser, AccessAnnotationChecker accessChecker) {
         this.authenticatedUser = authenticatedUser;
         this.accessChecker = accessChecker;
 

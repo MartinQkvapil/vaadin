@@ -4,7 +4,7 @@ import com.uhk.application.school.controller.LanguageSchool;
 import com.uhk.application.school.model.entity.CourseToTest;
 import com.uhk.application.school.model.entity.Question;
 import com.uhk.application.school.model.entity.Test;
-import com.uhk.application.school.model.security.Authentication;
+import com.uhk.application.school.model.security.AuthenticationService;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Tag;
@@ -37,7 +37,7 @@ public class QuizForm extends LitTemplate {
     @Autowired
     private LanguageSchool school;
     @Autowired
-    private Authentication authentication;
+    private AuthenticationService authentication;
 
     @Id("buttonOption1")
     private Button buttonOption1;

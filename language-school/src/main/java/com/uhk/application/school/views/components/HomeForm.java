@@ -4,8 +4,8 @@ import com.uhk.application.school.controller.LanguageSchool;
 import com.uhk.application.school.model.entity.Course;
 import com.uhk.application.school.model.entity.TeachingLanguages;
 import com.uhk.application.school.model.entity.User;
-import com.uhk.application.school.model.security.Authentication;
-import com.uhk.application.school.model.security.UserDetailsServiceImpl;
+import com.uhk.application.school.model.security.AuthenticationService;
+import com.uhk.application.school.model.security.LoginService;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Tag;
@@ -15,7 +15,6 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.littemplate.LitTemplate;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -40,7 +39,7 @@ public class HomeForm extends LitTemplate {
     private LanguageSchool school;
 
     @Autowired
-    private Authentication authentication;
+    private AuthenticationService authentication;
 
     @Id("languageGrid")
     private Grid<TeachingLanguages> languageGrid;
@@ -82,7 +81,7 @@ public class HomeForm extends LitTemplate {
             user.setName(inputName.getValue());
             user.setSurname(inputSurname.getValue());
             user.setRole("user");
-            user.setHashedPassword(UserDetailsServiceImpl.getHashedPassword(inputPassword.getValue()));
+            user.setHashedPassword(LoginService.getHashedPassword(inputPassword.getValue()));
             user.setEmail(inputEmail.getValue());
             user.setUsername(inputLogin.getValue());
             user.setIcon("");
