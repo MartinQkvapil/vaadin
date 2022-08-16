@@ -78,10 +78,8 @@ public class HomeForm extends LitTemplate {
         orderCourseButton.addClickListener(orderCourseListener());
 
         if (authentication.get().isPresent()) {
-            Optional<User> user = authentication.get();
             divOrderCourse.addClassNames("hide");
         }
-
     }
 
     private ComponentEventListener<ClickEvent<Button>> orderCourseListener() {
