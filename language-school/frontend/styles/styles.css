@@ -1,0 +1,15 @@
+.header-color{
+    background-color: lightskyblue !important;
+}
+
+.title {
+    margin-left: 10px;
+    text-shadow: 0 0 2px red;
+}
+
+.login-link {
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 3px;
+    color: black;
+}

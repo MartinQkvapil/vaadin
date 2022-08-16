@@ -28,7 +28,6 @@ public class DashboardForm extends LitTemplate {
 
     @Autowired
     private LanguageSchool school;
-
     @Autowired
     private AuthenticationService authentication;
 
@@ -47,7 +46,6 @@ public class DashboardForm extends LitTemplate {
             List<Test> tests = school.getAllTestsByUserId(loggedInUser.getIdUser());
             gridTests.setItems(tests);
         }
-
     }
 
     /**

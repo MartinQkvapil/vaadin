@@ -1,7 +1,10 @@
 package com.uhk.application.school.views.layout;
 
+import com.uhk.application.school.controller.LanguageSchool;
+import com.uhk.application.school.model.entity.TeachingLanguages;
 import com.uhk.application.school.model.entity.User;
 import com.uhk.application.school.model.security.AuthenticationService;
+import com.uhk.application.school.model.service.TeachingLanguageService;
 import com.uhk.application.school.views.createquestion.CreateQuestionView;
 import com.uhk.application.school.views.createtest.CreateTestView;
 import com.uhk.application.school.views.dashboard.DashboardView;
@@ -12,22 +15,28 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
 @PageTitle("Main")
+@CssImport("./styles/styles.css")
 public class MainLayout extends AppLayout {
+    private AuthenticationService authenticatedUser;
+    private AccessAnnotationChecker accessChecker;
 
     public static class MenuItemInfo {
-
         private String text;
         private String iconClass;
         private Class<? extends Component> view;
@@ -52,19 +61,17 @@ public class MainLayout extends AppLayout {
 
     }
 
-    private AuthenticationService authenticatedUser;
-    private AccessAnnotationChecker accessChecker;
+
 
     public MainLayout(AuthenticationService authenticatedUser, AccessAnnotationChecker accessChecker) {
         this.authenticatedUser = authenticatedUser;
         this.accessChecker = accessChecker;
-
         addToNavbar(createHeaderContent());
     }
 
     private Component createHeaderContent() {
         Header header = new Header();
-        header.addClassNames("bg-base", "border-b", "border-contrast-10", "box-border", "flex", "flex-col", "w-full");
+        header.addClassNames("header-color", "bg-base", "border-b", "border-contrast-10", "box-border", "flex", "flex-col", "w-full");
 
         Div layout = new Div();
         layout.addClassNames("flex", "h-xl", "items-center", "px-l");
@@ -73,15 +80,15 @@ public class MainLayout extends AppLayout {
         img.setWidth("30px");
         layout.add(img);
 
-        H1 appName = new H1("Language school");
-        appName.addClassNames("my-0", "me-auto", "text-l");
+        H1 appName = new H1("JAZYKOVÁ ŠKOLA - Angličtina, Španělština, Němčina");
+        appName.addClassNames("title", "my-xs", "me-auto", "text-l");
         layout.add(appName);
 
         Optional<User> maybeUser = authenticatedUser.get();
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();
 
-            Avatar avatar = new Avatar("TODO", "TODO");
+            Avatar avatar = new Avatar(user.getName(), "images/user.png");
             avatar.addClassNames("me-xs");
 
             ContextMenu userMenu = new ContextMenu(avatar);
@@ -95,7 +102,8 @@ public class MainLayout extends AppLayout {
 
             layout.add(avatar, name);
         } else {
-            Anchor loginLink = new Anchor("login", "Sign in");
+            Anchor loginLink = new Anchor("login", "Přihlásit se");
+            loginLink.addClassNames("login-link");
             layout.add(loginLink);
         }
 
@@ -104,7 +112,7 @@ public class MainLayout extends AppLayout {
 
         // Wrap the links in a list; improves accessibility
         UnorderedList list = new UnorderedList();
-        list.addClassNames("flex", "list-none", "m-0", "p-0");
+        list.addClassNames("flex", "list-none", "m-1", "p-0");
         nav.add(list);
 
         for (RouterLink link : createLinks()) {
