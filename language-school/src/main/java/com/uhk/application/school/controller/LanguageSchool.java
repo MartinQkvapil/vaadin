@@ -45,4 +45,5 @@ public interface LanguageSchool {
 
     int countWrongAnswers(int idUser);
     int countCorrectAnswers(int idUser);
+    List<Question> getAllQuestionsNotInTest(int idTest);
 }

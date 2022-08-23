@@ -163,7 +163,14 @@ public class ManageTestsForm extends LitTemplate {
         return event -> {
             currentTest = event.getItem();
             refreshQuestions();
+            refreshQuestionSelect();
         };
+    }
+
+    private void refreshQuestionSelect() {
+        if (currentTest != null) {
+            selectQuestion.setItems(school.getAllQuestionsNotInTest(currentTest.getIdTest()));
+        }
     }
 
     private ComponentEventListener<ClickEvent<Button>> createTestListener() {

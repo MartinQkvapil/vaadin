@@ -18,5 +18,12 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
             "join test t ON t2q.id_test = t.id_test " +
             "where t.id_test = ?1", nativeQuery = true)
     List<Question> findAllByTestId(int idTest);
+
+    @Query(value = "select * from question q " +
+            "where q.id_question not in ( select q.id_question from question q2 " +
+            "join test_to_question t2q ON q.id_question = t2q.id_question " +
+            "join test t ON t2q.id_test = t.id_test " +
+            "where t2q.id_test = ?1) ", nativeQuery = true)
+    List<Question> findAllQuestionNotInTest(int idTest);
 }
 

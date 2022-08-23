@@ -166,4 +166,8 @@ public class MainControllerImpl implements LanguageSchool{
     public int countCorrectAnswers(int idUser) {
         return courseToTestRepository.countCorrectByUserId(idUser);
     }
+
+    public List<Question> getAllQuestionsNotInTest(int idTest) {
+        return questionRepository.findAllQuestionNotInTest(idTest);
+    }
 }
