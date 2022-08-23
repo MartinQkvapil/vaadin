@@ -168,10 +168,15 @@ public class QuizForm extends LitTemplate {
                 }
                 if (position >= questions.size()) {
                     Notification notification = Notification.show("Konec testu!");
-                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                    notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
                     progressBar.setValue(1);
                     position = questions.size();
+
                     selectedCourseToTest.setDone(selectedCourseToTest.getDone() + 1);
+                    selectedCourseToTest.setWrongAnswers(badPoints);
+                    selectedCourseToTest.setCorrectAnswers(points);
+
+                    // TODO update points count in course!!!
                     try {
                         school.saveCourseToTest(selectedCourseToTest);
                     } catch (Exception e) {
@@ -183,7 +188,6 @@ public class QuizForm extends LitTemplate {
             } else {
                 Notification notification = Notification.show("Tento test jsme již vyplnili!");
                 notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
             }
         };
     }

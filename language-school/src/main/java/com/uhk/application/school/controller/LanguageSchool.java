@@ -42,4 +42,7 @@ public interface LanguageSchool {
     CourseToTest saveCourseToTest(CourseToTest courseToTest) throws Exception;
 
     Course getCourseByUserAndLanguage(int username, int idTeachingLanguage);
+
+    int countWrongAnswers(int idUser);
+    int countCorrectAnswers(int idUser);
 }

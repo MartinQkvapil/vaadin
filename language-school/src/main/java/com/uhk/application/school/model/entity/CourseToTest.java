@@ -18,6 +18,28 @@ public class CourseToTest implements Serializable {
     @Column(name="done")
     private int done;
 
+    @Column(name="wrong_answers")
+    private int wrongAnswers;
+
+    @Column(name="correct_answers")
+    private int correctAnswers;
+
+    public int getCorrectAnswers() {
+        return correctAnswers;
+    }
+
+    public void setCorrectAnswers(int correctAnswers) {
+        this.correctAnswers = correctAnswers;
+    }
+
+    public int getWrongAnswers() {
+        return wrongAnswers;
+    }
+
+    public void setWrongAnswers(int wrongAnswers) {
+        this.wrongAnswers = wrongAnswers;
+    }
+
     public int getDone() {
         return done;
     }

@@ -159,4 +159,11 @@ public class MainControllerImpl implements LanguageSchool{
     public Course getCourseByUserAndLanguage(int idUser, int idTeachingLanguage) {
         return courseRepository.findByUserIdAndTeachingLanguage(idUser, idTeachingLanguage);
     }
+
+    public int countWrongAnswers(int idUser) {
+        return courseToTestRepository.countWrongByUserId(idUser);
+    }
+    public int countCorrectAnswers(int idUser) {
+        return courseToTestRepository.countCorrectByUserId(idUser);
+    }
 }

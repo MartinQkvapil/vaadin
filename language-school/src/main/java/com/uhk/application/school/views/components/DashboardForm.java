@@ -6,8 +6,10 @@ import com.uhk.application.school.model.entity.User;
 import com.uhk.application.school.model.security.AuthenticationService;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.charts.model.*;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +33,11 @@ public class DashboardForm extends LitTemplate {
     @Autowired
     private AuthenticationService authentication;
 
-    @Id("chartAnswers")
-    private Chart chartAnswers;
     @Id("gridTests")
     private Grid<Test> gridTests;
+
+    @Id("divChart")
+    private Div divChart;
 
     @PostConstruct
     public void init() {
@@ -45,8 +48,46 @@ public class DashboardForm extends LitTemplate {
             gridTests.addColumn(Test::getQuestionCount).setHeader("Počet otázek").setSortable(true);
             List<Test> tests = school.getAllTestsByUserId(loggedInUser.getIdUser());
             gridTests.setItems(tests);
+
+            addChartCorrectWrongAnswers(
+                school.countCorrectAnswers(loggedInUser.getIdUser()),
+                school.countWrongAnswers(loggedInUser.getIdUser())
+            );
         }
     }
+
+    /**
+     * https://demo.vaadin.com/charts3/#PieChart
+     * @param correctAnswers
+     * @param wrongAnswers
+     */
+    private void addChartCorrectWrongAnswers(int correctAnswers, int wrongAnswers) {
+        Chart chart = new Chart(ChartType.PIE);
+
+        Configuration conf = chart.getConfiguration();
+
+        conf.setTitle("Celkový poměr správných a špatných odpovědí ve Vašich testech:");
+        Tooltip tooltip = new Tooltip();
+        tooltip.setValueDecimals(1);
+        conf.setTooltip(tooltip);
+
+        PlotOptionsPie plotOptions = new PlotOptionsPie();
+        plotOptions.setAllowPointSelect(true);
+        plotOptions.setCursor(Cursor.POINTER);
+        plotOptions.setShowInLegend(true);
+        conf.setPlotOptions(plotOptions);
+
+        DataSeries answers = new DataSeries();
+        DataSeriesItem correct = new DataSeriesItem("Správných", correctAnswers);
+        correct.setSliced(false);
+        correct.setSelected(true);
+        answers.add(correct);
+        answers.add(new DataSeriesItem("Špatných", wrongAnswers));
+        conf.setSeries(answers);
+        chart.setVisibilityTogglingDisabled(true);
+        divChart.add(chart);
+    }
+
 
     /**
      * Creates a new DashboardForm.
