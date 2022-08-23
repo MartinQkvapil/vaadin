@@ -97,14 +97,12 @@ public class HomeForm extends LitTemplate {
             try {
                 school.saveUser(user);
             } catch (UserException e) {
-                Dialog dialog = new Dialog();
-                dialog.add(new Text(e.getMessage()));
-                dialog.open();
+                Notification notification = Notification.show("Chyba:" + e.getMessage());
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                 return;
             } catch (Exception e) {
-                Dialog dialog = new Dialog();
-                dialog.add(new Text("Tento uživate databázi již existuje."));
-                dialog.open();
+                Notification notification = Notification.show("Chyba: Uživatel již v databázi existuje." + e.getMessage());
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                 return;
             }
             User savedUser = school.getUserByName(user.getUsername());
@@ -119,14 +117,12 @@ public class HomeForm extends LitTemplate {
             try {
                 school.saveCourse(course);
             } catch (CourseException e) {
-                Dialog dialog = new Dialog();
-                dialog.add(new Text(e.getMessage()));
-                dialog.open();
+                Notification notification = Notification.show("Chyba validace:" + e.getMessage());
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                 return;
             } catch (Exception e) {
-                Dialog dialog = new Dialog();
-                dialog.add(new Text("Tento kurz databázi již existuje." + e));
-                dialog.open();
+                Notification notification = Notification.show("Chyba kurz pro tohoto uživatele již existuje:" + e.getMessage());
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                 return;
             }
 
@@ -140,14 +136,12 @@ public class HomeForm extends LitTemplate {
                 try {
                     CourseToTest c2t = school.saveCourseToTest(testToCourse);
                 } catch (CourseToTestException e) {
-                    Dialog dialog = new Dialog();
-                    dialog.add(new Text(e.getMessage()));
-                    dialog.open();
+                    Notification notification = Notification.show("Chyba validace:" + e.getMessage());
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                     return;
                 } catch (Exception e) {
-                    Dialog dialog = new Dialog();
-                    dialog.add(new Text("Chyba při vytváření testů. Pro tento kurz." + e));
-                    dialog.open();
+                    Notification notification = Notification.show("Chyba test již existuje:" + e.getMessage());
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
                     return;
                 }
             }
