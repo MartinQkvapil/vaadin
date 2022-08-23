@@ -106,11 +106,13 @@ public class ManageTestsForm extends LitTemplate {
                 t2q.setIdQuestion(selectQuestion.getValue().getIdQuestion());
                 try {
                     school.saveTestToQuestion(t2q);
+                    Notification notification = Notification.show("Otázka úspěšně přidána k testu!");
+                    notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+                    refreshQuestions();
+                    refreshQuestionSelect();
                 } catch (DataIntegrityViolationException e) {
                     Notification notification = Notification.show("Test již tuto otázku obsahuje!");
                     notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-                } finally {
-                    refreshQuestions();
                 }
             }
 
