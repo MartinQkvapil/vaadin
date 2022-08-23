@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +35,6 @@ import java.util.List;
 public class QuestionForm extends LitTemplate {
     @Autowired
     private LanguageSchool school;
-    @Id("selectLanguage")
-    private Select<TeachingLanguages> selectLanguage;
     @Id("textAreaQuestion")
     private TextArea textAreaQuestion;
     @Id("inputCorrectAnswer")
@@ -47,7 +46,7 @@ public class QuestionForm extends LitTemplate {
     @Id("gridQuestions")
     private Grid<Question> gridQuestions;
     @Id("selectPoints")
-    private Select<String> selectPoints;
+    private Select<Integer> selectPoints;
     @Id("buttonSave")
     private Button buttonSave;
     @Id("buttonEdit")
@@ -63,10 +62,11 @@ public class QuestionForm extends LitTemplate {
 
     @PostConstruct
     public void init() {
-        selectLanguage.setItemLabelGenerator(TeachingLanguages::getName);
-        List<TeachingLanguages> languages = school.getAllLanguages();
-        selectLanguage.setItems(languages);
-        selectLanguage.setValue(languages.get(0));
+        List<Integer> values = new ArrayList<>();
+        int x = 1;
+        values.add(x);
+        selectPoints.setItems(values);
+        selectPoints.setValue(values.get(0));
 
         gridQuestions.addColumn(Question::getIdQuestion).setHeader("ID otázky").setSortable(true);
         gridQuestions.addColumn(Question::getQuestion).setHeader("Otázka").setSortable(true);
@@ -74,6 +74,7 @@ public class QuestionForm extends LitTemplate {
         gridQuestions.addColumn(Question::getAnswer2).setHeader("Odpověď2").setSortable(true);
         gridQuestions.addColumn(Question::getAnswer3).setHeader("Odpověď3").setSortable(true);
         gridQuestions.addColumn(Question::getAnswer4).setHeader("Odpověď4").setSortable(true);
+        gridQuestions.addColumn(Question::getPoints).setHeader("Bodů").setSortable(true);
         List<Question> questions = school.getAllQuestions();
         gridQuestions.setItems(questions);
 
@@ -142,7 +143,7 @@ public class QuestionForm extends LitTemplate {
             question.setAnswer2(inputWrong1.getValue());
             question.setAnswer3(inputWrong2.getValue());
             question.setAnswer4(inputWrong3.getValue());
-            question.setPoints(1);
+            question.setPoints(selectPoints.getValue());
 
 
             try {
@@ -151,6 +152,7 @@ public class QuestionForm extends LitTemplate {
                 dialog.add(new Text("Otázka byla úspěšně uložena."));
                 dialog.open();
                 refreshQuestionGrid();
+                refreshInputs();
 
             } catch (Exception e)
             {
@@ -167,16 +169,19 @@ public class QuestionForm extends LitTemplate {
     private ComponentEventListener<ClickEvent<Button>> refreshQuestionForm() {
         return event -> {
             refreshQuestionGrid();
-            currentQuestion = null;
-            inputWrong1.setValue("");
-            inputCorrectAnswer.setValue("");
-            inputWrong2.setValue("");
-            inputWrong3.setValue("");
-            textAreaQuestion.setValue("");
-            selectPoints.setItems();
-
+            refreshInputs();
         };
     }
+
+    private void refreshInputs() {
+        currentQuestion = null;
+        inputWrong1.setValue("");
+        inputCorrectAnswer.setValue("");
+        inputWrong2.setValue("");
+        inputWrong3.setValue("");
+        textAreaQuestion.setValue("");
+    }
+
     /**
      * Creates a new QuestionForm.
      */
