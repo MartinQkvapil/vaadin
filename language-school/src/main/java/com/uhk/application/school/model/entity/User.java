@@ -91,4 +91,18 @@ public class User implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idUser=" + idUser +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", hashedPassword='" + hashedPassword + '\'' +
+                ", role='" + role + '\'' +
+                ", username='" + username + '\'' +
+                ", Icon='" + Icon + '\'' +
+                '}';
+    }
 }

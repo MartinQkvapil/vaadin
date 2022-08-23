@@ -2,10 +2,7 @@ package com.uhk.application.school.controller;
 
 import com.uhk.application.school.model.entity.*;
 import com.uhk.application.school.model.repository.*;
-import com.uhk.application.school.model.validator.CourseValidator;
-import com.uhk.application.school.model.validator.QuestionValidator;
-import com.uhk.application.school.model.validator.UserValidator;
-import com.uhk.application.school.model.validator.TestValidator;
+import com.uhk.application.school.model.validator.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,11 +36,13 @@ public class MainControllerImpl implements LanguageSchool{
     private CourseToTestRepository courseToTestRepository;
 
     @Autowired
+    private CourseToTestValidator courseToTestValidator;
+    @Autowired
     private TestToQuestionRepository testToQuestionRepository;
 
     @Override
     public User getUserByName(String name) {
-        return userRepository.findByEmail(name);
+        return userRepository.findByUsername(name);
     }
 
     @Override
@@ -52,21 +51,29 @@ public class MainControllerImpl implements LanguageSchool{
     }
 
     @Override
-    public void saveUser(User user) throws Exception {
-        userValidator.validate(user);
-
-        Optional<User> temp = userRepository.findById(user.getIdUser());
-        if (temp.isPresent()) {
-            user.setIdUser(temp.get().getIdUser());
+    public User saveUser(User user) throws Exception {
+        User userSaved = null;
+        if (user != null) {
+            userValidator.validate(user);
+            userSaved = userRepository.findByEmail(user.getEmail());
+            if (userSaved != null) {
+                user.setIdUser(userSaved.getIdUser());
+            }
         }
-
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
-    public void saveCourse(Course course) throws Exception {
-        courseValidator.validate(course);
-        courseRepository.save(course);
+    public Course saveCourse(Course course) throws Exception {
+        Course savedCourse = null;
+        if (course != null) {
+            courseValidator.validate(course);
+            savedCourse = courseRepository.findByUserIdAndTeachingLanguage(course.getIdUser(), course.getIdTeachingLanguage());
+            if (savedCourse != null) {
+                course.setIdCourse(savedCourse.getIdCourse());
+            }
+        }
+        return courseRepository.save(course);
     }
 
     @Override
@@ -137,7 +144,19 @@ public class MainControllerImpl implements LanguageSchool{
         return courseToTestRepository.findByUserIdAndTestId(idUser, idTest);
     }
 
-    public  void saveCourseToTest(CourseToTest courseToTest) {
-        courseToTestRepository.save(courseToTest);
+    public CourseToTest saveCourseToTest(CourseToTest courseToTest) throws Exception {
+        CourseToTest savedCourseToTest = null;
+        if (courseToTest != null) {
+            courseToTestValidator.validate(courseToTest);
+            savedCourseToTest = courseToTestRepository.findByCourseIdAndTestId(courseToTest.getIdCourse(), courseToTest.getIdTest());
+            if (savedCourseToTest != null) {
+                courseToTest.setIdCourseToTest(savedCourseToTest.getIdCourseToTest());
+            }
+        }
+        return courseToTestRepository.save(courseToTest);
+    }
+
+    public Course getCourseByUserAndLanguage(int idUser, int idTeachingLanguage) {
+        return courseRepository.findByUserIdAndTeachingLanguage(idUser, idTeachingLanguage);
     }
 }

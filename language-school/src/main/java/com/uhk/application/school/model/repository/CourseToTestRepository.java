@@ -23,4 +23,10 @@ public interface CourseToTestRepository extends JpaRepository<CourseToTest, Inte
             "where c.id_user = ?1 and t.id_test = ?2",
             nativeQuery = true)
     CourseToTest findByUserIdAndTestId(int idUser, int idTest);
+
+    @Query(value = "select * " +
+        "from course_to_test c2t " +
+        "where c2t.id_course = ?1 and c2t.id_test = ?2",
+        nativeQuery = true)
+    CourseToTest findByCourseIdAndTestId(int idCourse, int idTest);
 }

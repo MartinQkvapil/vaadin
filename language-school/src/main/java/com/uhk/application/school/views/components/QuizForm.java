@@ -172,7 +172,11 @@ public class QuizForm extends LitTemplate {
                     progressBar.setValue(1);
                     position = questions.size();
                     selectedCourseToTest.setDone(selectedCourseToTest.getDone() + 1);
-                    school.saveCourseToTest(selectedCourseToTest);
+                    try {
+                        school.saveCourseToTest(selectedCourseToTest);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                     return;
                 }
                 questionVoid();

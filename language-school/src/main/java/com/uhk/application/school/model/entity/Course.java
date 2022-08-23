@@ -10,12 +10,12 @@ import java.io.Serializable;
 @Table(name="course")
 public class Course implements Serializable {
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, name = "id_course")
     private int idCourse;
 
     private int points;
 
-    private String native_lang;
+    private String nativeLang;
 
     private String description;
     @Column(name = "id_teaching_lang")
@@ -41,12 +41,12 @@ public class Course implements Serializable {
         this.points = points;
     }
 
-    public String getNative_lang() {
-        return native_lang;
+    public String getNativeLang() {
+        return nativeLang;
     }
 
-    public void setNative_lang(String native_lang) {
-        this.native_lang = native_lang;
+    public void setNativeLang(String native_lang) {
+        this.nativeLang = native_lang;
     }
 
     public String getDescription() {
@@ -71,5 +71,17 @@ public class Course implements Serializable {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "idCourse=" + idCourse +
+                ", points=" + points +
+                ", native_lang='" + nativeLang + '\'' +
+                ", description='" + description + '\'' +
+                ", idTeachingLanguage=" + idTeachingLanguage +
+                ", idUser=" + idUser +
+                '}';
     }
 }

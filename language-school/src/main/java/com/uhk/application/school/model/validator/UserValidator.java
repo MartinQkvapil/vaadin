@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Service
 public class UserValidator {
-    public void validate(User user) throws Exception {
+    public void validate(User user) throws UserException {
         if (user == null) {
             throw new UserException("Neexistuje uživatel");
         }

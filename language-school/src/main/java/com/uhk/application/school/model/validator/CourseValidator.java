@@ -13,9 +13,6 @@ import java.util.Objects;
 
 @Service
 public class CourseValidator {
-    @Autowired
-    private CourseRepository courseRepository;
-
     public void validate(Course course) throws Exception {
         if (course == null) {
             throw new CourseException("Neexistuje kurz.");

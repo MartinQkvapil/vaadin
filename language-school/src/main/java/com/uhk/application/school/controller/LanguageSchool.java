@@ -9,9 +9,9 @@ public interface LanguageSchool {
 
     List<TeachingLanguages> getAllLanguages();
 
-    void saveUser(User user) throws Exception;
+    User saveUser(User user) throws Exception;
 
-    void saveCourse(Course course) throws Exception;
+    Course saveCourse(Course course) throws Exception;
 
     List<Test> getAllTestsByUserId(int idUser);
 
@@ -39,5 +39,7 @@ public interface LanguageSchool {
 
     CourseToTest getCourseToTestByUserAndTestId(int idUser, int idTest);
 
-    void saveCourseToTest(CourseToTest courseToTest);
+    CourseToTest saveCourseToTest(CourseToTest courseToTest) throws Exception;
+
+    Course getCourseByUserAndLanguage(int username, int idTeachingLanguage);
 }

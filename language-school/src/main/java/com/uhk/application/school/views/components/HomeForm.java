@@ -1,10 +1,10 @@
 package com.uhk.application.school.views.components;
 
 import com.uhk.application.school.controller.LanguageSchool;
+import com.uhk.application.school.exception.CourseException;
+import com.uhk.application.school.exception.CourseToTestException;
 import com.uhk.application.school.exception.UserException;
-import com.uhk.application.school.model.entity.Course;
-import com.uhk.application.school.model.entity.TeachingLanguages;
-import com.uhk.application.school.model.entity.User;
+import com.uhk.application.school.model.entity.*;
 import com.uhk.application.school.model.security.AuthenticationService;
 import com.uhk.application.school.model.security.LoginService;
 import com.vaadin.flow.component.ClickEvent;
@@ -17,6 +17,8 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.littemplate.LitTemplate;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -24,10 +26,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import javax.management.Notification;
-import javax.validation.ConstraintViolationException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * A Designer generated component for the home-form template.
@@ -94,43 +93,67 @@ public class HomeForm extends LitTemplate {
             user.setHashedPassword(LoginService.getHashedPassword(inputPassword.getValue()));
             user.setEmail(inputEmail.getValue());
             user.setUsername(inputLogin.getValue());
-            user.setIcon("");
-
-            Course course = new Course();
-            course.setDescription("Kurz pro uživatele " + user.getName() + " " + user.getSurname());
-            course.setPoints(0);
-            course.setIdUser(user.getIdUser());
-            course.setNative_lang("cz");
-            course.setIdTeachingLanguage(selectLanguages.getValue().getIdTeachingLanguage());
 
             try {
-                Optional<User> maybeUser = authentication.get();
-                String msg = "";
-
-                if (!maybeUser.isPresent()) {
-                    school.saveUser(user);
-                    msg = "Nový uživatel úspěšně vytvořen - přihlašte se. ";
-                }
-
-                if (maybeUser.isPresent()) {
-                    User loggedUser = maybeUser.get();
-                    course.setIdUser(loggedUser.getIdUser());
-                }
-
-                school.saveCourse(course);
-                msg += "Nový kurz úspěšně vytvořen.";
-                Dialog dialog = new Dialog();
-                dialog.add(new Text(msg));
-                dialog.open();
+                school.saveUser(user);
             } catch (UserException e) {
                 Dialog dialog = new Dialog();
                 dialog.add(new Text(e.getMessage()));
                 dialog.open();
+                return;
             } catch (Exception e) {
                 Dialog dialog = new Dialog();
                 dialog.add(new Text("Tento uživate databázi již existuje."));
                 dialog.open();
+                return;
             }
+            User savedUser = school.getUserByName(user.getUsername());
+
+            Course course = new Course();
+            course.setDescription("Kurz pro uživatele " + user.getName() + " " + user.getSurname());
+            course.setPoints(0);
+            course.setNativeLang("cz");
+            course.setIdTeachingLanguage(selectLanguages.getValue().getIdTeachingLanguage());
+            course.setIdUser(savedUser.getIdUser());
+
+            try {
+                school.saveCourse(course);
+            } catch (CourseException e) {
+                Dialog dialog = new Dialog();
+                dialog.add(new Text(e.getMessage()));
+                dialog.open();
+                return;
+            } catch (Exception e) {
+                Dialog dialog = new Dialog();
+                dialog.add(new Text("Tento kurz databázi již existuje." + e));
+                dialog.open();
+                return;
+            }
+
+            Course savedCourse = school.getCourseByUserAndLanguage(savedUser.getIdUser(), course.getIdTeachingLanguage());
+            for (Test test: school.getAllTestsByLanguage(savedCourse.getIdTeachingLanguage())) {
+                CourseToTest testToCourse = new CourseToTest();
+                testToCourse.setDone(0);
+                testToCourse.setIdTest(test.getIdTest());
+                testToCourse.setIdCourse(savedCourse.getIdCourse());
+
+                try {
+                    CourseToTest c2t = school.saveCourseToTest(testToCourse);
+                } catch (CourseToTestException e) {
+                    Dialog dialog = new Dialog();
+                    dialog.add(new Text(e.getMessage()));
+                    dialog.open();
+                    return;
+                } catch (Exception e) {
+                    Dialog dialog = new Dialog();
+                    dialog.add(new Text("Chyba při vytváření testů. Pro tento kurz." + e));
+                    dialog.open();
+                    return;
+                }
+            }
+
+            Notification notification = Notification.show("Kurz byl úspěšně vytvořen prosím přihlašte se!");
+            notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
         };
     }
 

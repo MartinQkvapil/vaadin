@@ -51,4 +51,14 @@ public class CourseToTest implements Serializable {
     public void setIdTest(int idTest) {
         this.idTest = idTest;
     }
+
+    @Override
+    public String toString() {
+        return "CourseToTest{" +
+                "idCourseToTest=" + idCourseToTest +
+                ", idCourse=" + idCourse +
+                ", idTest=" + idTest +
+                ", done=" + done +
+                '}';
+    }
 }
