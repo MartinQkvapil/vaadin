@@ -30,13 +30,13 @@ public interface CourseToTestRepository extends JpaRepository<CourseToTest, Inte
         nativeQuery = true)
     CourseToTest findByCourseIdAndTestId(int idCourse, int idTest);
 
-    @Query(value = "select sum(c2t.wrong_answers) " +
+    @Query(value = "select COALESCE(sum(c2t.wrong_answers), 0) AS wrong_answers " +
             "from course_to_test c2t " +
             "join course c ON c.id_course = c2t.id_course " +
             "where c.id_user = ?1 ", nativeQuery = true)
     int countWrongByUserId(int idUser);
 
-    @Query(value = "select sum(c2t.correct_answers) " +
+    @Query(value = "select COALESCE(sum(c2t.correct_answers), 0) AS correct_answers " +
             "from course_to_test c2t " +
             "join course c ON c.id_course = c2t.id_course " +
             "where c.id_user = ?1 ", nativeQuery = true)
