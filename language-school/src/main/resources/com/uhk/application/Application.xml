@@ -8,6 +8,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
+    <bean class="com.uhk.application.school.controller.MainControllerImpl" />
+
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations" value="classpath:/application.properties"/>
     </bean>
