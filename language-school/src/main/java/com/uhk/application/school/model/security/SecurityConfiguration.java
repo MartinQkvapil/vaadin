@@ -24,11 +24,6 @@ public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public LanguageSchool languageSchool() {
-        return new MainControllerImpl();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
