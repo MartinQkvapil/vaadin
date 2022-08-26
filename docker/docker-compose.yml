@@ -7,6 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile_mysql
     image: 'mysql_school:latest'
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
     restart: always
     container_name: db
     environment:
@@ -16,3 +17,5 @@ services:
       - MYSQL_PASSWORD=pass
     ports:
       - '3306:3306'
+
+# UTF8 coding - https://stackoverflow.com/questions/62019044/mysql-change-charset-to-utf-8

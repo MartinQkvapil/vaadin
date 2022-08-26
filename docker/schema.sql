@@ -6,8 +6,11 @@ DROP SCHEMA IF EXISTS `db` ;
 -- -----------------------------------------------------
 -- Schema db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `db` DEFAULT CHARACTER SET utf8 ;
+SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
+CREATE SCHEMA IF NOT EXISTS `db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 USE `db` ;
+
+
 
 -- -----------------------------------------------------
 -- Table `db`.`user`
@@ -180,6 +183,7 @@ USE `db`;
 INSERT INTO `db`.`teaching_lang` (`id_teaching_lang`, `code`, `name`) VALUES (1, 'en', 'english');
 INSERT INTO `db`.`teaching_lang` (`id_teaching_lang`, `code`, `name`) VALUES (2, 'de', 'german');
 INSERT INTO `db`.`teaching_lang` (`id_teaching_lang`, `code`, `name`) VALUES (3, 'es', 'spanish');
+INSERT INTO `db`.`teaching_lang` (`id_teaching_lang`, `code`, `name`) VALUES (4, 'fr', 'french');
 
 COMMIT;
 
@@ -201,15 +205,45 @@ COMMIT;
 START TRANSACTION;
 USE `db`;
 INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (1, 'car', 'auto', 'kolo', 'letadlo', 'město', 1);
-INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (2, 'air', 'vzduch', 'kolo', 'uživatel', 'kolo', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (2, 'plane', 'letadlo', 'kolo', 'uživatel', 'kolo', 1);
 INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (3, 'bus', 'autobus', 'raketa', 'letadlo', 'auto', 1);
-INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (4, 'glass', 'sklenice', 'město', 'kolo', 'letadlo', 1);
-INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (5, 'sun', 'slunce', 'letadlo', 'letadlo', 'auto', 1);
-INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (6, 'bike', 'slunce', 'automobil', 'letadlo', 'auto', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (4, 'police', 'police', 'město', 'kolo', 'letadlo', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (5, 'wheel', 'kolo (od auta)', 'letadlo', 'letadlo', 'auto', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (6, 'bike', 'kolo', 'automobil', 'letadlo', 'auto', 1);
 INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (7, 'rocket', 'raketa', 'autobus', 'letadlo', 'auto', 1);
-INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (8, 'black', 'černá', 'růžová', 'modrá', 'auto', 1);
-INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (9, 'cards', 'karty', 'rajče', 'cibule', 'peach', 1);
-INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (10, 'tomato', 'rajče', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (8, 'traffic jam', 'zácpa', 'růžová', 'modrá', 'auto', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (9, 'passanger', 'cestujicí', 'rajče', 'cibule', 'peach', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (10, 'jeep', 'džíp', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (11, 'tomato', 'rajče', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (12, 'onion', 'cibule', 'paprika', 'sdfa', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (13, 'peanut', 'arašíd', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (14, 'avocado', 'avokado', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (15, 'potato', 'brambora', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (16, 'celery', 'celer', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (17, 'beet root', 'řepa', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (18, 'lentils', 'čočka', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (19, 'fennel', 'fenykl', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (20, 'lettuce', 'salát', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (21, 'banana', 'banán', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (22, 'orange', 'pomeranč', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (23, 'pear', 'hruška', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (24, 'citron', 'citron', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (25, 'grapefruit', 'grep', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (26, 'apple', 'jablko', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (27, 'kiwi', 'kiwi', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (28, 'lime', 'limetka', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (29, 'grape', 'hrozny', 'parprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (30, 'coconut', 'kokos', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (31, 'river', 'řeka', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (32, 'milk', 'mléko', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (33, 'spoon', 'lžíce', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (34, 'ice', 'led', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (35, 'cafe', 'kavárna', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (36, 'wine', 'víno', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (37, 'coffee', 'kafe', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (38, 'limonade', 'limonáda', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (39, 'alcohol', 'alkohol', 'paprika', 'cibule', 'pití', 1);
+INSERT INTO `db`.`question` (`id_question`, `question`, `answ1`, `answ2`, `answ3`, `answ4`, `points`) VALUES (40, 'water', 'voda', 'paprika', 'cibule', 'pití', 1);
 
 COMMIT;
 
@@ -220,7 +254,7 @@ COMMIT;
 START TRANSACTION;
 USE `db`;
 INSERT INTO `db`.`test` (`id_test`, `question_count`, `test_name`, `id_teaching_lang`) VALUES (1, 10, 'Transport', 1);
-INSERT INTO `db`.`test` (`id_test`, `question_count`, `test_name`, `id_teaching_lang`) VALUES (2, 15, 'Vegetable', 1);
+INSERT INTO `db`.`test` (`id_test`, `question_count`, `test_name`, `id_teaching_lang`) VALUES (2, 10, 'Vegetable', 1);
 INSERT INTO `db`.`test` (`id_test`, `question_count`, `test_name`, `id_teaching_lang`) VALUES (3, 10, 'Fruit', 1);
 INSERT INTO `db`.`test` (`id_test`, `question_count`, `test_name`, `id_teaching_lang`) VALUES (4, 10, 'Drinks', 1);
 
@@ -233,7 +267,45 @@ COMMIT;
 START TRANSACTION;
 USE `db`;
 INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (1, 1, 1, '');
-INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (2, 2, 1, '');
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (2, 1, 2, '');
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (3, 1, 3, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (4, 1, 4, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (5, 1, 5, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (6, 1, 6, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (7, 1, 7, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (8, 1, 8, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (9, 1, 9, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (10, 1, 10, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (11, 2, 11, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (12, 2, 12, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (13, 2, 13, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (14, 2, 14, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (15, 2, 15, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (16, 2, 16, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (17, 2, 17, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (18, 2, 18, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (19, 2, 19, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (20, 2, 20, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (21, 3, 21, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (22, 3, 22, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (23, 3, 23, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (24, 3, 24, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (25, 3, 25, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (26, 3, 26, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (27, 3, 27, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (28, 3, 28, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (29, 3, 29, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (30, 3, 30, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (31, 4, 31, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (32, 4, 32, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (33, 4, 33, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (34, 4, 34, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (35, 4, 35, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (36, 4, 36, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (37, 4, 37, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (38, 4, 38, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (39, 4, 39, NULL);
+INSERT INTO `db`.`test_to_question` (`id_test_to_question`, `id_test`, `id_question`, `answ`) VALUES (40, 4, 40, NULL);
 
 COMMIT;
 
@@ -246,6 +318,7 @@ USE `db`;
 INSERT INTO `db`.`course_to_test` (`id_course_to_test`, `id_course`, `id_test`, `done`, `wrong_answers`, `correct_answers`) VALUES (1, 1, 1, 0, 0, 0);
 INSERT INTO `db`.`course_to_test` (`id_course_to_test`, `id_course`, `id_test`, `done`, `wrong_answers`, `correct_answers`) VALUES (2, 1, 2, 0, 0, 0);
 INSERT INTO `db`.`course_to_test` (`id_course_to_test`, `id_course`, `id_test`, `done`, `wrong_answers`, `correct_answers`) VALUES (3, 1, 3, 0, 0, 0);
+INSERT INTO `db`.`course_to_test` (`id_course_to_test`, `id_course`, `id_test`, `done`, `wrong_answers`, `correct_answers`) VALUES (4, 1, 4, 0, 0, 0);
 
 COMMIT;
 
