@@ -10,6 +10,9 @@ import java.util.Objects;
 
 @Service
 public class UserValidator {
+
+    @Autowired
+    private UserRepository userRepository;
     public void validate(User user) throws UserException {
         if (user == null) {
             throw new UserException("Neexistuje uživatel");
@@ -43,6 +46,14 @@ public class UserValidator {
         }
         if (user.getUsername().length() > 100) {
             throw new UserException("Heslo je moc dlouhé");
+        }
+        if (user.getIdUser() == 0) {
+            if (userRepository.findByUsername(user.getUsername()) != null){
+                throw new UserException("Uživatel s tímto jménem již je v databázi.");
+            }
+            if (userRepository.findByEmail(user.getEmail()) != null){
+                throw new UserException("Uživatel s tímto emailem již je v databázi.");
+            }
         }
     }
 }
