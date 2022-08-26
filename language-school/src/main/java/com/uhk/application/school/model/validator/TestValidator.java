@@ -10,18 +10,9 @@ import org.testng.TestException;
 
 @Service
 public class TestValidator {
-
-    @Autowired
-    private TestRepository testRepository;
-
     public void validate(Test test) throws Exception {
         if (test == null) {
             throw new CourseException("Neexistuje test.");
-        }
-        if (test.getIdTest() == 0) {
-            if (testRepository.findAllByUserId(test.getIdTest()) != null){
-                throw new TestException("Uživatel má již tento test přidělený.");
-            }
         }
     }
 }

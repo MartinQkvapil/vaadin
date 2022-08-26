@@ -183,10 +183,29 @@ public class ManageTestsForm extends LitTemplate {
             test.setTestLanguage(selectLanguage.getValue().getIdTeachingLanguage());
             try {
                 school.saveTest(test);
-                // TODO add notif
+                Notification notification = Notification.show("Nový test vytvořen!");
+                notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+
+                Test savedTest = school.getTestByName(test.getTestName());
+                List<Course> courses = school.getAllCourses(test.getTestLanguage());
+                for (Course course: courses) {
+                    CourseToTest testToCourse = new CourseToTest();
+                    testToCourse.setDone(0);
+                    testToCourse.setIdTest(savedTest.getIdTest());
+                    testToCourse.setIdCourse(course.getIdCourse());
+
+                    try {
+                        school.saveCourseToTest(testToCourse);
+                    } catch (Exception e) {
+                        Notification error = Notification.show("Chyba při distribuci testů." + e.getMessage());
+                        error.addThemeVariants(NotificationVariant.LUMO_ERROR);
+                        return;
+                    }
+                }
                 refreshTests();
             } catch (Exception e) {
-                // TODO add notif
+                Notification notification = Notification.show("Test není možné vytvořit nový test!" + e.getMessage());
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
             }
         };
     }

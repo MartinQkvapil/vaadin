@@ -25,4 +25,9 @@ public interface TestRepository extends JpaRepository<Test, Integer> {
             "where t.id_teaching_lang = ?1",
             nativeQuery = true)
     List<Test> findAllByLanguageId(int idTeachingLanguage);
+
+    @Query(value = "select * " +
+            "from test t " +
+            "where t.test_name = ?1", nativeQuery = true)
+    Test findByTestName(String testName);
 }

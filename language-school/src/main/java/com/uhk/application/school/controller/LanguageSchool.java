@@ -46,4 +46,8 @@ public interface LanguageSchool {
     int countWrongAnswers(int idUser);
     int countCorrectAnswers(int idUser);
     List<Question> getAllQuestionsNotInTest(int idTest);
+
+    List<Course> getAllCourses(int teachingLanguageId);
+
+    Test getTestByName(String testName);
 }

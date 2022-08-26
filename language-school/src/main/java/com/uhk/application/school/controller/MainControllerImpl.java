@@ -170,4 +170,16 @@ public class MainControllerImpl implements LanguageSchool{
     public List<Question> getAllQuestionsNotInTest(int idTest) {
         return questionRepository.findAllQuestionNotInTest(idTest);
     }
+
+    @Override
+    public List<Course> getAllCourses(int teachingLanguageId) {
+        return courseRepository.findAllByLanguageId(teachingLanguageId);
+    }
+
+    @Override
+    public Test getTestByName(String testName) {
+        return testRepository.findByTestName(testName);
+    }
+
+
 }

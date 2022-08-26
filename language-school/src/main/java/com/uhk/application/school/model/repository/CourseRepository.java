@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query(value = "select * " +
@@ -12,4 +14,9 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
             "where c.id_user = ?1 and c.id_teaching_lang = ?2 ",
             nativeQuery = true)
     Course findByUserIdAndTeachingLanguage(int idUser, int idTeachingLanguage);
+
+    @Query(value = "select * " +
+            "from course c " +
+            "where c.id_teaching_lang = ?1 ",nativeQuery = true)
+    List<Course> findAllByLanguageId(int teachingLanguageId);
 }
